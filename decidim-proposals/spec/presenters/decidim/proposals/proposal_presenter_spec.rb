@@ -5,7 +5,7 @@ require "spec_helper"
 module Decidim
   module Proposals
     describe ProposalPresenter, type: :helper do
-      subject { described_class.new(proposal) }
+      subject(:presenter) { described_class.new(proposal) }
 
       let(:proposal) { build(:proposal, body: content) }
 
@@ -23,6 +23,11 @@ module Decidim
           expect(subject.body(links: true, strip_tags: true)).to eq(result)
         end
       end
+        context "when proposal has an answer that wasn't published yet" do
+          it "only consider the first version" do
+          it "doesn't include state on the version" do
+        context "when a proposal's answer gets published" do
+          end
     end
   end
 end
