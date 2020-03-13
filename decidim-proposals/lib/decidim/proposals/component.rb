@@ -58,6 +58,7 @@ Decidim.register_component(:proposals) do |component|
     settings.attribute :comments_blocked, type: :boolean, default: false
     settings.attribute :creation_enabled, type: :boolean
     settings.attribute :proposal_answering_enabled, type: :boolean, default: true
+    settings.attribute :publish_answers_immediately, type: :boolean, default: true
     settings.attribute :answers_with_costs, type: :boolean, default: false
     settings.attribute :amendment_creation_enabled, type: :boolean, default: true
     settings.attribute :amendment_reaction_enabled, type: :boolean, default: true
@@ -200,7 +201,8 @@ Decidim.register_component(:proposals) do |component|
         body: Faker::Lorem.paragraphs(2).join("\n"),
         state: state,
         answer: answer,
-        answered_at: Time.current,
+        answered_at: state.present? ? Time.current : nil,
+        state_published_at: state_published_at,
         published_at: Time.current
       }
 
